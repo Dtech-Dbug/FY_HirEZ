@@ -1,4 +1,7 @@
 import React, { useEffect } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+
 import { Select } from "antd";
 const { Option } = Select;
 
@@ -10,27 +13,30 @@ export const ProductCreateForm = ({
   setValues,
   selectedCategory,
   showSubcategories,
+  description,
+  setDescription,
 }) => {
   useEffect(() => {
     console.log(categories);
   }, []);
   const {
     title,
-    description,
     salary,
     vacancy,
-    color,
-    colors,
+    companyName,
+    companyLink,
     jobType,
     jobTypes,
+    location,
     categories,
     subCategories,
+    applicationLink,
   } = values;
 
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
-        <label>Title</label>
+        <label className="required">Title</label>
         <input
           className="form-control"
           type="text"
@@ -38,40 +44,39 @@ export const ProductCreateForm = ({
           value={title}
           required
           onChange={handleChange}
+          autoFocus
         />
       </div>
       <div className="form-group">
-        <label>Description</label>
+        <label className="required">Description</label>
+        <ReactQuill
+          theme="snow"
+          value={description}
+          onChange={setDescription}
+        />
+      </div>
+      <div className="form-group">
+        <label className="required">Company Name</label>
         <input
           type="text"
-          name="description"
+          name="companyName"
           className="form-control"
-          value={description}
+          value={companyName}
           onChange={handleChange}
         />
       </div>
       <div className="form-group">
-        <label>Salary</label>
+        <label className="required">Company URL</label>
         <input
-          type="number"
-          name="salary"
+          type="url"
+          name="companyLink"
           className="form-control"
-          value={salary}
+          value={companyLink}
           onChange={handleChange}
         />
       </div>
       <div className="form-group">
-        <label>Vacancy</label>
-        <input
-          type="number"
-          name="vacancy"
-          className="form-control"
-          value={vacancy}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-group">
-        <label>Type</label>
+        <label className="required">Job Types</label>
         <select name="jobType" className="form-control" onChange={handleChange}>
           <option>Please select</option>
           {jobTypes.map((c) => (
@@ -81,6 +86,37 @@ export const ProductCreateForm = ({
           ))}
         </select>
       </div>
+      <div className="form-group">
+        <label className="required">Location</label>
+        <input
+          type="string"
+          name="location"
+          className="form-control"
+          value={location}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="form-group">
+        <label className="required">Salary</label>
+        <input
+          type="number"
+          name="salary"
+          className="form-control"
+          value={salary}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="form-group">
+        <label className="required">Vacancy</label>
+        <input
+          type="number"
+          name="vacancy"
+          className="form-control"
+          value={vacancy}
+          onChange={handleChange}
+        />
+      </div>
+
       <div className="form-group">
         <label>Select Category</label>
         <select className="form-control" onChange={handleCategoryChange}>
@@ -95,8 +131,6 @@ export const ProductCreateForm = ({
               );
             })}
         </select>
-
-        {showSubcategories.length}
       </div>
 
       {selectedCategory && (
@@ -118,6 +152,17 @@ export const ProductCreateForm = ({
           </Select>
         </div>
       )}
+
+      <div className="form-group">
+        <label className="required">Application Link</label>
+        <input
+          type="url"
+          name="applicationLink"
+          className="form-control"
+          value={applicationLink}
+          onChange={handleChange}
+        />
+      </div>
       <button onClick={handleSubmit} className="btn btn-raised btn-primary">
         Save
       </button>

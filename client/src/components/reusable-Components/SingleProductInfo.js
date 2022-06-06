@@ -12,13 +12,14 @@ const SingleProductInfo = ({ product }) => {
     color,
     quantity,
     sold,
+    salary,
   } = product;
   return (
     <ul className="list-group">
       <li className="list-group-item">
         Salary{" "}
         <span className="label label-default label-pill pull-xs-right ">
-          $ {price}
+          $ {salary}
         </span>
       </li>
       {category && (

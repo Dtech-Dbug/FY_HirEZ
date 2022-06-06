@@ -28,8 +28,8 @@ const initialState = {
   salary: "",
   vacancy: "",
   shipping: "",
-  color: "",
-  colors: ["Red", "Blue", "Green", "Black", "White"],
+  companyName: "",
+  companyLink: "",
   jobType: "",
   jobTypes: [
     "Full-Time",
@@ -39,9 +39,11 @@ const initialState = {
     "Apprenticeship",
     "Fellowship",
   ],
+  location: "",
   categories: [],
   category: "",
   subCategories: [],
+  applicationLink: "",
   images: [
     // {
     // 	public_id: "jwrzeubemmypod99e8lz",
@@ -63,6 +65,7 @@ export const CreateProduct = () => {
   const { user } = useSelector((state) => ({ ...state }));
 
   const [values, setValues] = useState(initialState);
+  const [description, setDescription] = useState("");
 
   //show sub options only when category is selected,
   const [showSubcategories, setShowSubcategories] = useState([]);
@@ -81,7 +84,7 @@ export const CreateProduct = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    createProduct(values, user.token)
+    createProduct({ ...values, description }, user.token)
       .then((res) => {
         console.log(res);
         console.log(window.location.href);
@@ -121,7 +124,7 @@ export const CreateProduct = () => {
           {loading ? (
             <LoadingOutlined className="alert alert-danger" />
           ) : (
-            <h3>Create Product</h3>
+            <h3>Post A Job, Be The Change!🌍</h3>
           )}
 
           <div className="p-3">
@@ -133,8 +136,6 @@ export const CreateProduct = () => {
             />
           </div>
 
-          {JSON.stringify(values.images)}
-
           <ProductCreateForm
             handleChange={handleChange}
             handleSubmit={handleSubmit}
@@ -145,6 +146,8 @@ export const CreateProduct = () => {
             selectedCategory={selectedCategory}
             loading={loading}
             setLoading={setLoading}
+            description={description}
+            setDescription={setDescription}
           />
         </div>
       </div>

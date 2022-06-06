@@ -51,6 +51,7 @@ export const UpdateProduct = ({ match, history }) => {
   const { user } = useSelector((state) => ({ ...state }));
 
   const [values, setValues] = useState(initialState);
+  const [description, setDescription] = useState("");
 
   //show sub options only when category is selected,
   const [showSubcategories, setShowSubcategories] = useState([]);
@@ -177,7 +178,7 @@ export const UpdateProduct = ({ match, history }) => {
             />
           </div>
 
-          {JSON.stringify(values)}
+          {/* {JSON.stringify(values)} */}
 
           <ProductUpdateForm
             handleChange={handleChange}
@@ -190,6 +191,8 @@ export const UpdateProduct = ({ match, history }) => {
             arrayOfSubcategoriesId={arrayOfSubcategoriesId}
             setArrayOfSubcategoriesId={setArrayOfSubcategoriesId}
             selectedCategory={selectedCategory}
+            description={description}
+            setDescription={setDescription}
           />
         </div>
       </div>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SingleProductInfo from "./SingleProductInfo";
 import { Link } from "react-router-dom";
 import { Card, Tabs, Tooltip } from "antd";
-import { ShoppingCartOutlined, HeartOutlined } from "@ant-design/icons";
+import { DownSquareTwoTone, HeartOutlined } from "@ant-design/icons";
 import StarRatings from "react-star-ratings";
 import { showAverageRating } from "../../functions/rating";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,9 +20,10 @@ import { useHistory } from "react-router-dom";
 
 const { Meta } = Card;
 const { TabPane } = Tabs;
+
 const SingleProductViewCard = ({ product, onStarClick, star }) => {
   const [tooltip, setTooltip] = useState("Click to add to cart");
-  const { title, images, description, _id, ratings } = product;
+  const { title, images, description, _id, ratings, applicationLink } = product;
   const { user, cart } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   const history = useHistory();
@@ -87,7 +88,8 @@ const SingleProductViewCard = ({ product, onStarClick, star }) => {
 
         <Tabs type="card">
           <TabPane tab="Description" key="1">
-            {description && description}
+            <div dangerouslySetInnerHTML={{ __html: description }}></div>
+            {/* {description && description} */}
           </TabPane>
           <TabPane tab="More" key="2">
             <p>Contact Us For more Info , here 🤜 xxxxxxxx</p>
@@ -106,24 +108,24 @@ const SingleProductViewCard = ({ product, onStarClick, star }) => {
         <Card
           actions={[
             <Tooltip title={tooltip}>
-              <a onClick={handleAddToCart}>
-                <ShoppingCartOutlined className="text-success" /> <br />
-                Add to Cart
+              <a href={applicationLink} rel="noreferrer" target="_blank">
+                <DownSquareTwoTone className="text-success" /> <br />
+                Apply
               </a>
             </Tooltip>,
             <a onClick={handleAddToWishList}>
               <HeartOutlined className="text-info" /> <br /> Add to Wishlist
             </a>,
-            <RatingModal>
-              <StarRatings
-                name={_id}
-                numberOfStars={5}
-                rating={star}
-                changeRating={onStarClick}
-                isSelectable={true}
-                starRatedColor="Yellow"
-              />
-            </RatingModal>,
+            // <RatingModal>
+            //   <StarRatings
+            //     name={_id}
+            //     numberOfStars={5}
+            //     rating={star}
+            //     changeRating={onStarClick}
+            //     isSelectable={true}
+            //     starRatedColor="Yellow"
+            //   />
+            // </RatingModal>,
           ]}
         >
           <SingleProductInfo product={product} />

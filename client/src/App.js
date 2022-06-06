@@ -37,96 +37,91 @@ import { UpdateProduct } from "./components/pages/protected-routes/admin/Product
 import ViewProduct from "./components/pages/ViewProduct";
 import CategoryHome from "./components/pages/Categories/CategoryHome";
 import Shop from "./components/pages/Shop";
-import Cart from "./components/pages/Cart";
 import DrawerCard from "./components/Drawer/DrawerCard";
-import Checkout from "./components/pages/Checkout";
-import Payment from "./components/pages/Payment";
+
 import CouponPageAdmin from "./components/pages/protected-routes/admin/Coupons/CouponPageAdmin";
 import Wishlist from "./components/pages/protected-routes/user/wishlist";
 
 function App() {
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-	//to check firebase auth state
-	useEffect(() => {
-		const unSubscribe = auth.onAuthStateChanged(async (user) => {
-			if (user) {
-				const userIdToken = await user.getIdTokenResult();
-				console.log("USer loged in ", user);
+  //to check firebase auth state
+  useEffect(() => {
+    const unSubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const userIdToken = await user.getIdTokenResult();
+        console.log("USer loged in ", user);
 
-				currentUser(userIdToken.token)
-					.then((res) => {
-						console.log("res from own server , currentUSer ", res);
-						dispatch({
-							type: "USER_LOGGED_IN",
-							payload: {
-								email: user.email,
-								token: userIdToken.token,
-								name: res.data.name,
-								role: res.data.role,
-								_id: res.data._id,
-							},
-						});
-					})
-					.catch((err) => console.log(err));
-			}
-		});
-		//cleanup
-		return () => unSubscribe();
-	}, []);
+        currentUser(userIdToken.token)
+          .then((res) => {
+            console.log("res from own server , currentUSer ", res);
+            dispatch({
+              type: "USER_LOGGED_IN",
+              payload: {
+                email: user.email,
+                token: userIdToken.token,
+                name: res.data.name,
+                role: res.data.role,
+                _id: res.data._id,
+              },
+            });
+          })
+          .catch((err) => console.log(err));
+      }
+    });
+    //cleanup
+    return () => unSubscribe();
+  }, []);
 
-	return (
-		<div className="App">
-			<Nav />
-			<DrawerCard />
-			<ToastContainer />
+  return (
+    <div className="App">
+      <Nav />
+      <DrawerCard />
+      <ToastContainer />
 
-			<Route path="/" exact component={Home} />
-			<Route path="/login" exact component={Login} />
-			<Route path="/register" exact component={Register} />
-			<Route path="/register/complete" exact component={RegisterComplete} />
-			<Route path="/forgot/password" exact component={ForgotPassword} />
-			<Route path="/products/:slug" exact component={ViewProduct} />
-			<Route path="/category/:slug" exact component={CategoryHome} />
-			<Route path="/shop" exact component={Shop} />
-			<Route path="/cart" exact component={Cart} />
-			<Route path="/checkout" exact component={Checkout} />
-			<Route path="/payment" exact component={Payment} />
+      <Route path="/" exact component={Home} />
+      <Route path="/login" exact component={Login} />
+      <Route path="/register" exact component={Register} />
+      <Route path="/register/complete" exact component={RegisterComplete} />
+      <Route path="/forgot/password" exact component={ForgotPassword} />
+      <Route path="/products/:slug" exact component={ViewProduct} />
+      <Route path="/category/:slug" exact component={CategoryHome} />
+      <Route path="/shop" exact component={Shop} />
 
-			<Switch>
-				<UserRoute exact path="/user/history" component={History} />
-				<UserRoute exact path="/user/password" component={UserPassword} />
-				<UserRoute exact path="/user/wishlist" component={Wishlist} />
+      <Switch>
+        <UserRoute exact path="/user/history" component={History} />
+        <UserRoute exact path="/user/password" component={UserPassword} />
+        <UserRoute exact path="/user/wishlist" component={Wishlist} />
 
-				<AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
-				<AdminRoute exact path="/admin/category" component={CreateCategory} />
+        <AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
+        <AdminRoute exact path="/admin/category" component={CreateCategory} />
 
-				<AdminRoute
-					exact
-					path="/admin/category/:slug"
-					component={UpdateCategory}
-				/>
-				<AdminRoute
-					exact
-					path="/admin/subCategory"
-					component={CreateSubCategory}
-				/>
-				<AdminRoute
-					exact
-					path={`/admin/subCategory/:slug`}
-					component={UpdateSubCategory}
-				/>
-				<AdminRoute exact path="/admin/product" component={CreateProduct} />
-				<AdminRoute exact path="/admin/products" component={ListAllProducts} />
-				<AdminRoute
-					exact
-					path="/admin/product/:slug"
-					component={UpdateProduct}
-				/>
-				<AdminRoute exact path="/admin/coupons" component={CouponPageAdmin} />
-			</Switch>
-		</div>
-	);
+        <AdminRoute
+          exact
+          path="/admin/category/:slug"
+          component={UpdateCategory}
+        />
+        <AdminRoute
+          exact
+          path="/admin/subCategory"
+          component={CreateSubCategory}
+        />
+        <AdminRoute
+          exact
+          path={`/admin/subCategory/:slug`}
+          component={UpdateSubCategory}
+        />
+        <AdminRoute exact path="/admin/product" component={CreateProduct} />
+        <AdminRoute exact path="/admin/products" component={ListAllProducts} />
+        <AdminRoute
+          exact
+          path="/admin/product/:slug"
+          component={UpdateProduct}
+        />
+        <AdminRoute exact path="/admin/coupons" component={CouponPageAdmin} />
+      </Switch>
+    </div>
+  );
 }
 
 export default App;

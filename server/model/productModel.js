@@ -13,7 +13,6 @@ const productSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      maxlength: 500,
       required: true,
       text: true,
     },
@@ -42,6 +41,17 @@ const productSchema = new mongoose.Schema(
         "Fellowship",
       ],
     },
+    companyName: {
+      type: String,
+      required: true,
+    },
+    companyLink: {
+      type: String,
+      required: true,
+    },
+    location: {
+      type: String,
+    },
     category: {
       type: ObjectId,
       ref: "Category",
@@ -52,7 +62,10 @@ const productSchema = new mongoose.Schema(
         ref: "SubCategory",
       },
     ],
-
+    applicationLink: {
+      type: String,
+      required: true,
+    },
     images: {
       type: Array,
     },
