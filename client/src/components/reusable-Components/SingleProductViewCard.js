@@ -22,7 +22,7 @@ const { Meta } = Card;
 const { TabPane } = Tabs;
 
 const SingleProductViewCard = ({ product, onStarClick, star }) => {
-  const [tooltip, setTooltip] = useState("Click to add to cart");
+  const [tooltip, setTooltip] = useState("Apply for this job");
   const { title, images, description, _id, ratings, applicationLink } = product;
   const { user, cart } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
@@ -88,10 +88,13 @@ const SingleProductViewCard = ({ product, onStarClick, star }) => {
 
         <Tabs type="card">
           <TabPane tab="Description" key="1">
-            <div dangerouslySetInnerHTML={{ __html: description }}></div>
+            <div
+              className="text-white"
+              dangerouslySetInnerHTML={{ __html: description }}
+            ></div>
             {/* {description && description} */}
           </TabPane>
-          <TabPane tab="More" key="2">
+          <TabPane tab="More" key="2" className="text-white">
             <p>Contact Us For more Info , here 🤜 xxxxxxxx</p>
           </TabPane>
         </Tabs>
@@ -99,11 +102,11 @@ const SingleProductViewCard = ({ product, onStarClick, star }) => {
 
       <div className="col-md-5">
         <h3 className="bg-info text-center ">{title}</h3>
-        {product && ratings && ratings.length > 0 ? (
+        {/* {product && ratings && ratings.length > 0 ? (
           showAverageRating(product)
         ) : (
           <div className="text-center pt-1 pb-3">No rating yet</div>
-        )}
+        )} */}
 
         <Card
           actions={[

@@ -9,7 +9,7 @@ import _ from "lodash";
 const { Meta } = Card;
 
 const HomePageProductCard = ({ product }) => {
-  const [tootltip, setTooltip] = useState("click to add to cart");
+  const [tootltip, setTooltip] = useState("Apply for this job");
   const {
     images,
     title,
@@ -78,7 +78,7 @@ const HomePageProductCard = ({ product }) => {
         actions={[
           <>
             <Link to={`/products/${slug}`}>
-              <EyeOutlined /> <br /> view Prouct
+              <EyeOutlined /> <br /> view Job
             </Link>
           </>,
 

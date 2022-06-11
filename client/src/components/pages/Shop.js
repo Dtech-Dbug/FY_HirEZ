@@ -355,7 +355,7 @@ const Shop = () => {
           {loading ? (
             <h4 className="text-danger">Loading...</h4>
           ) : (
-            <h4 className="info-Bg">Products</h4>
+            <h4 className="text-white">Jobs</h4>
           )}
 
           <div className="row pb-5">

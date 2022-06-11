@@ -16,24 +16,24 @@ const SingleProductInfo = ({ product }) => {
   } = product;
   return (
     <ul className="list-group">
-      <li className="list-group-item">
+      <li className="list-group-item text-white">
         Salary{" "}
-        <span className="label label-default label-pill pull-xs-right ">
+        <span className="label label-default label-pill pull-xs-right text-white">
           $ {salary}
         </span>
       </li>
       {category && (
-        <li className="list-group-item">
+        <li className="list-group-item text-white">
           Category{" "}
           <Link
             to={`/category/${category.slug}`}
-            className="label label-default label-pill pull-xs-right"
+            className="label label-default label-pill pull-xs-right text-white"
           >
             {category.name}
           </Link>
         </li>
       )}
-      <li className="list-group-item">
+      <li className="list-group-item text-white">
         Sub Categories{" "}
         {subCategories &&
           subCategories.map((s) => {
@@ -41,22 +41,22 @@ const SingleProductInfo = ({ product }) => {
               <Link
                 to={`subcategory/${s.slug}`}
                 key={s._id}
-                className="label label-default label-pill pull-xs-right "
+                className="label label-default label-pill pull-xs-right text-white"
               >
                 {s.name}
               </Link>
             );
           })}
       </li>
-      <li className="list-group-item">
+      <li className="list-group-item text-white">
         Type{" "}
-        <span className="label label-default label-pill pull-xs-right ">
+        <span className="label label-default label-pill pull-xs-right text-white">
           {jobType}
         </span>
       </li>
-      <li className="list-group-item">
+      <li className="list-group-item text-white">
         Vacancy
-        <span className="label label-default label-pill pull-xs-right ">
+        <span className="label label-default label-pill pull-xs-right text-white">
           {vacancy}
         </span>
       </li>

@@ -15,6 +15,11 @@ body h1 {
   font-weight: bold;
   letter-spacing: 3px;
 }
+
+body h2 {
+  text-shadow: 2px 2px 60px var(--secondary-color) !important;
+  color: white !important;
+}
 body h3 {
   color: white !important;
   font-weight: 500 !important;
@@ -106,4 +111,13 @@ body h3 {
 
 .ant-card-actions a {
   color: white !important;
+}
+
+/* /** buTOONs */
+.btn .btn-outlined-primary .btn-lg .btn-raised .m-3 a {
+  color: var(--secondary-color) !important;
+}
+
+nav > li {
+  color: red !important;
 }

@@ -36,14 +36,15 @@ export const Home = () => {
       <NewestArrivals />
       <br />
       <br />
-      <h3 className="display-3  text-center mt-1 mb-1 jumotron-sm">Remote</h3>
+      <h3 className="display-3  text-center mt-1 mb-1 jumotron-sm">All Jobs</h3>
       <BestSellers />
       <h3 className=" text-center mt-1 mb-1 display-4  jumotron-sm">
         Categories
       </h3>
       <CategoryLists />
+
       <h3 className="text-center mt-1 mb-1 display-4  jumotron-sm">
-        Categories
+        Sub Categories
       </h3>
       <SubCategoriesList />
     </>

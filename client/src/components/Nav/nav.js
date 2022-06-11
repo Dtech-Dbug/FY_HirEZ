@@ -1,32 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Menu, Badge } from "antd";
 import {
-  SmileTwoTone,
   UserOutlined,
   UserAddOutlined,
   HomeTwoTone,
   LogoutOutlined,
   DashboardTwoTone,
-  ShoppingTwoTone,
-  ShoppingCartOutlined,
-  CarTwoTone,
+  FileSearchOutlined,
+  DownSquareOutlined,
 } from "@ant-design/icons";
+
+import CategoryLists from "../pages/HomePageSections/CategoryLists";
 
 import Search from "../reusable-Components/Search";
 
 import firebase from "firebase";
-import { useHistory } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
+import { getCategoryLists } from "../../functions/categoryCRUD";
 
 const { SubMenu, Item } = Menu;
 
 export const Nav = () => {
   const [current, setCurrent] = useState("home");
+  const [allcategories, setAllCategories] = useState([]);
+
   const dispatch = useDispatch();
   const { user, cart } = useSelector((state) => ({ ...state }));
   const history = useHistory();
+
+  useEffect(() => {
+    getCategoryLists().then((res) => {
+      setAllCategories(res.data);
+      console.log("nav categories", res.data);
+    });
+  }, []);
 
   const handleClick = (e) => {
     //
@@ -50,7 +61,7 @@ export const Nav = () => {
         <Link to="/">Home</Link>
       </Item>
 
-      <Item key="shop" icon={<ShoppingTwoTone twoToneColor="white" />}>
+      <Item key="shop" icon={<FileSearchOutlined twoToneColor="white" />}>
         <Link to="/shop">Browse Jobs</Link>
       </Item>
 
@@ -72,7 +83,7 @@ export const Nav = () => {
 
       {user && (
         <SubMenu
-          icon={<SmileTwoTone twoToneColor="crimson" />}
+          icon={<UserOutlined twoToneColor="white" />}
           title={user.email && user.email.split("@")[0]}
           //.split('@) to split at '@' : e.g => name@gmail.com split at @ => ['name' , 'gmail.com'] we need the 0th element for the name
           className="float-right"

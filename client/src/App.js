@@ -41,9 +41,12 @@ import DrawerCard from "./components/Drawer/DrawerCard";
 
 import CouponPageAdmin from "./components/pages/protected-routes/admin/Coupons/CouponPageAdmin";
 import Wishlist from "./components/pages/protected-routes/user/wishlist";
+import CategoryLists from "./components/pages/HomePageSections/CategoryLists";
 
 function App() {
   const dispatch = useDispatch();
+
+  const showCategoriesList = () => <CategoryLists />;
 
   //to check firebase auth state
   useEffect(() => {
@@ -75,7 +78,7 @@ function App() {
 
   return (
     <div className="App">
-      <Nav />
+      <Nav showCategoriesList={showCategoriesList} />
       <DrawerCard />
       <ToastContainer />
 
