@@ -20,7 +20,8 @@ body h2 {
   text-shadow: 2px 2px 60px var(--secondary-color) !important;
   color: white !important;
 }
-body h3 {
+body h3,
+h4 {
   color: white !important;
   font-weight: 500 !important;
 }
@@ -118,6 +119,10 @@ body h3 {
   color: var(--secondary-color) !important;
 }
 
-nav > li {
-  color: red !important;
+.custom-file-control:disabled,
+.form-control:disabled,
+.form-control[readonly],
+[readonly].custom-file-control {
+  background-color: var(--secondary-color) !important;
+  opacity: 1;
 }

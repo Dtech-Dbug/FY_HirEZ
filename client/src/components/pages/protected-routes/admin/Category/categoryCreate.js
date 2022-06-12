@@ -98,7 +98,7 @@ export const CreateCategory = () => {
 					<AdminNav />
 				</div>
 				<div className="col">
-					<h2 className="text-warning">
+					<h2 className="text-white">
 						Welcome Admin. Ready to create categories?
 					</h2>
 					{categoryForm()}

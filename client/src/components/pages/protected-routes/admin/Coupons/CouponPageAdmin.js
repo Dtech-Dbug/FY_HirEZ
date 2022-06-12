@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-	createCoupon,
-	removeCoupon,
-	getCoupons,
+  createCoupon,
+  removeCoupon,
+  getCoupons,
 } from "../../../../../functions/coupons";
 import AdminNav from "../../../../Nav/Admin-Nav";
 import { toast } from "react-toastify";
@@ -14,138 +14,138 @@ import { DeleteOutlined } from "@ant-design/icons";
 
 const fields = { coupon: "", discount: "" };
 const CouponPageAdmin = () => {
-	const [expiry, setExpiry] = useState("");
-	const [values, setValues] = useState(fields);
-	const { coupon, discount } = values;
-	const [coupons, setCoupons] = useState([]);
-	const { user } = useSelector((state) => ({ ...state }));
+  const [expiry, setExpiry] = useState("");
+  const [values, setValues] = useState(fields);
+  const { coupon, discount } = values;
+  const [coupons, setCoupons] = useState([]);
+  const { user } = useSelector((state) => ({ ...state }));
 
-	useEffect(() => {
-		getCoupons().then((res) => setCoupons(res.data));
-	}, []);
+  useEffect(() => {
+    getCoupons().then((res) => setCoupons(res.data));
+  }, []);
 
-	const handleChange = (e) => {
-		e.preventDefault();
-		setValues({ ...values, [e.target.name]: e.target.value });
-	};
+  const handleChange = (e) => {
+    e.preventDefault();
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
 
-	function handleSubmit(e) {
-		e.preventDefault();
+  function handleSubmit(e) {
+    e.preventDefault();
 
-		let couponValues = { name: coupon, discount: discount, expiry: expiry };
+    let couponValues = { name: coupon, discount: discount, expiry: expiry };
 
-		console.table(couponValues);
+    console.table(couponValues);
 
-		createCoupon(couponValues, user.token).then((res) => {
-			toast.success("Created");
-			getCoupons().then((res) => setCoupons(res.data));
-		});
-	}
+    createCoupon(couponValues, user.token).then((res) => {
+      toast.success("Created");
+      getCoupons().then((res) => setCoupons(res.data));
+    });
+  }
 
-	const handleRemoveCoupon = (couponId) => {
-		if (window.confirm("Sure?")) {
-			removeCoupon(couponId, user.token)
-				.then((res) => {
-					toast.error(`Coupon "${res.data.name}" is deleted`);
-					//instantly show the change by fetching available coupons again
-					getCoupons().then((res) => setCoupons(res.data));
-				})
-				.catch((err) => console.log(err));
-		}
-		console.log(couponId);
-	};
-	return (
-		<div className="container-fluid">
-			<div className="row">
-				<div className="col-md-2">
-					<AdminNav />
-				</div>
+  const handleRemoveCoupon = (couponId) => {
+    if (window.confirm("Sure?")) {
+      removeCoupon(couponId, user.token)
+        .then((res) => {
+          toast.error(`Coupon "${res.data.name}" is deleted`);
+          //instantly show the change by fetching available coupons again
+          getCoupons().then((res) => setCoupons(res.data));
+        })
+        .catch((err) => console.log(err));
+    }
+    console.log(couponId);
+  };
+  return (
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-md-2">
+          <AdminNav />
+        </div>
 
-				<div className="col-md-10">
-					<h1>Coupon</h1>
+        <div className="col-md-10">
+          <h1>Referrals</h1>
 
-					<form>
-						<div className="from-group">
-							<label className="text-muted"> Coupon Name</label>
-							<input
-								name="coupon"
-								className="form-control"
-								type="text"
-								autoFocus
-								required
-								onChange={handleChange}
-								value={coupon}
-							/>
-						</div>
+          <form>
+            <div className="from-group">
+              <label className="text-muted"> Referral Id</label>
+              <input
+                name="coupon"
+                className="form-control"
+                type="text"
+                autoFocus
+                required
+                onChange={handleChange}
+                value={coupon}
+              />
+            </div>
 
-						<div className="from-group">
-							<label className="text-muted"> Discount</label>
-							<input
-								name="discount"
-								className="form-control"
-								type="text"
-								required
-								value={discount}
-								onChange={handleChange}
-							/>
-						</div>
+            <div className="from-group">
+              <label className="text-muted"> Job Id</label>
+              <input
+                name="discount"
+                className="form-control"
+                type="text"
+                required
+                value={discount}
+                onChange={handleChange}
+              />
+            </div>
 
-						<div className="from-group">
-							<label className="text-muted"> Expiry</label>
-							<br />
-							<DatePicker
-								className="form-control"
-								selected={expiry}
-								value={expiry}
-								onChange={(date) => setExpiry(date)}
-							/>
-						</div>
+            {/* <div className="from-group">
+              <label className="text-muted"> Expiry</label>
+              <br />
+              <DatePicker
+                className="form-control"
+                selected={expiry}
+                value={expiry}
+                onChange={(date) => setExpiry(date)}
+              />
+            </div> */}
 
-						<button
-							onClick={handleSubmit}
-							className="btn btn-raised btn-primary mt-2"
-						>
-							Save
-						</button>
-					</form>
+            <button
+              onClick={handleSubmit}
+              className="btn btn-raised btn-primary mt-2"
+            >
+              Save
+            </button>
+          </form>
 
-					<hr />
+          <hr />
 
-					<h3>{coupons.length} Coupons</h3>
+          <h3>{coupons.length} Referrals</h3>
 
-					<table className="table table-bordered">
-						<thead className="thead-light">
-							<tr>
-								<th scope="col">Name</th>
-								<th scope="col">Discount</th>
-								<th scope="col">Expiry</th>
-								<th scope="col">Action</th>
-							</tr>
-						</thead>
+          <table className="table table-bordered">
+            <thead className="thead-light">
+              <tr>
+                <th scope="col">Referral Id</th>
+                <th scope="col">Job Id</th>
+                {/* <th scope="col">Expiry</th> */}
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
 
-						{coupons &&
-							coupons.length &&
-							coupons.map((c, i) => {
-								return (
-									<tbody key={c._id}>
-										<td>{c.name}</td>
-										<td>{c.discount}</td>
-										<td>
-											<Moment>{c.expiry}</Moment>
-										</td>
-										<td>
-											<DeleteOutlined
-												onClick={() => handleRemoveCoupon(c._id)}
-											/>
-										</td>
-									</tbody>
-								);
-							})}
-					</table>
-				</div>
-			</div>
-		</div>
-	);
+            {coupons &&
+              coupons.length &&
+              coupons.map((c, i) => {
+                return (
+                  <tbody key={c._id}>
+                    <td>{c.name}</td>
+                    <td>{c.discount}</td>
+                    <td>
+                      <Moment>{c.expiry}</Moment>
+                    </td>
+                    <td>
+                      <DeleteOutlined
+                        onClick={() => handleRemoveCoupon(c._id)}
+                      />
+                    </td>
+                  </tbody>
+                );
+              })}
+          </table>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default CouponPageAdmin;

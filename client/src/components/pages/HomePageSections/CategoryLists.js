@@ -20,7 +20,7 @@ const CategoryLists = () => {
       return (
         <div
           key={c._id}
-          className="col btn btn-outlined-primary btn-lg btn-raised m-3"
+          className="col btn btn-outlined-white btn-lg btn-raised m-3"
         >
           <Link to={`/category/${c.slug}`}>{c.name}</Link>
         </div>
